@@ -2,7 +2,7 @@
 
 
 ### Route grouping
-In the routing file, we can see a lot of similar lines for each services. For example the routes for Organizations services :
+In the routing file, we can see a lot of similar lines for each service. For example the routes for Organizations services :
 
 ```php
 Route::get('organizations')->name('organizations')->uses('OrganizationsController@index')->middleware('remember', 'auth');
@@ -32,12 +32,12 @@ For each services, It's better to make unique seed file.
 
 
 ### Test Driven Development
-The tests for example the forgot password page are not implemented but we can add more unit tests and then write a code with the TDD method by writing each test before writing the source code and then reshuffling the continuous code. It avoid less bugs and It's a gain of time.
+The tests for example the forgot password page are not implemented, but we can add more unit tests and then write a code with the TDD method by writing each test before writing the source code and then reshuffling the continuous code. It avoid less bugs and It's a gain of time.
 
 ### Redundant scope filter function
 The scope filter function is present several times, we can find it in Organization, Contact, User and Report model, which is redundant.
 In these functions we only have the name of the table fields which are variable. 
-We can make a function that applies to each models.
+We can make a function that applies to each model.
 
 
 
@@ -50,3 +50,6 @@ For example in the report page, if the table is sorted by date, we would like to
 ### Improve the dashboard
 Usually in the CRM dashboard, we can see the metrics that matter most. It's also called KPI, in order to have a global vision of the application, or the performance of the company.
 We can also find shortcut tabs to the different services (Organizations, Reports, ...)
+
+### Reports page
+For the reports, it can be better if the user print a report or the list of all reports. Or import all reports by PDF or CSV.
