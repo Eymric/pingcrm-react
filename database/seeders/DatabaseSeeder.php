@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Models\Report;
 use App\Models\User;
 use App\Models\Account;
 use App\Models\Contact;
@@ -27,6 +28,10 @@ class DatabaseSeeder extends Seeder
         ]);
 
         $organizations = Organization::factory()->count(100)->create([
+            'account_id' => $account->id
+        ]);
+
+        Report::factory()->count(100)->create([
             'account_id' => $account->id
         ]);
 

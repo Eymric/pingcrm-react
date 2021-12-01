@@ -3,7 +3,12 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
+use App\Mail\MailNotifier;
+use App\Models\User;
 use Illuminate\Foundation\Auth\SendsPasswordResetEmails;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Mail;
+use Inertia\Inertia;
 
 class ForgotPasswordController extends Controller
 {
@@ -29,4 +34,22 @@ class ForgotPasswordController extends Controller
     {
         $this->middleware('guest');
     }
+
+    public function showForgotPasswordForm()
+    {
+        return Inertia::render('Auth/ForgotPassword');
+    }
+
+    public function sendPasswordResetMail(Request $request)
+    {
+        $email = $request->email;
+        $user =  User::where('email', $email)->exists();
+        if(!$user)
+            return back()->withErrors(['email' => 'Oops. Who are you?']);
+
+        Mail::to($email)->send(new MailNotifier());
+
+        return redirect()->route('login')->with('success', 'We did it !');
+    }
+
 }
